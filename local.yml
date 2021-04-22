@@ -1,0 +1,4 @@
+---
+- hosts: localhosts
+  become: yes
+  roles: git
