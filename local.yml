@@ -1,5 +1,4 @@
----
-- hosts: localhost
-  tasks:
-  - name: Execute command
-    command: df
+- hosts: all
+3   tasks:
+4   - name: install example application
+5     command: df
