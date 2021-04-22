@@ -1,6 +1,6 @@
 ---
 - hosts: localhost
-  remote_uer: root
+  remote_user: root
   gather_facts: yes
   become: false
   tasks:
