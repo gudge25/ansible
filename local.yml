@@ -4,19 +4,12 @@
   gather_facts: yes
   become: false
   tasks:
-
   - name: Distribution
     debug: msg="{{ ansible_distribution }}"
-
   - name: Install package foo from repo
     community.general.pacman:
       name: nano
       state: present
-
-  - name: Show facts available on the system
-    ansible.builtin.debug:
-      var: ansible_facts
-
   - name: Shut down Debian flavored systems
     ansible.builtin.command: ls
     when: ansible_facts['os_family'] == "Archlinux"
