@@ -11,5 +11,8 @@
     debug: msg="{{ ansible_distribution_major_version }}"
   - name: Install package foo from repo
     community.general.pacman:
-      name: foo
+      name: 
+      - mc
+      - nano
+      - wget
       state: present
