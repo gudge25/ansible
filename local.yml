@@ -7,5 +7,5 @@
     debug: msg="{{ ansible_distribution }}"
   - name: Install package foo from repo
     community.general.pacman:
-      name: git
+      name: nano
       state: present
