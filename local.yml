@@ -9,3 +9,9 @@
     debug: msg="{{ ansible_distribution_version}}"
   - name: Distribution major version
     debug: msg="{{ ansible_distribution_major_version }}"
+  - name: Install package foo from repo and bar from file
+  community.general.pacman:
+    name:
+      - git
+      - nano
+    state: present
