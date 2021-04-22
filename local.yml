@@ -1,4 +1,5 @@
 ---
 - hosts: localhosts
-  become: yes
-  roles: git
+  tasks:
+  - name: Execute command
+    command: df
