@@ -7,9 +7,5 @@
     debug: msg="{{ ansible_distribution }}"
   - name: Install package foo from repo
     community.general.pacman:
-      name: 
-      - mc
-      - nano
-      - wget
+      name: git
       state: present
-      update_cache: yes
