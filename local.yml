@@ -16,4 +16,7 @@
   - name: return motd to registered var
     command: uname -r
     register: myKernel
-  - debug: myKernel=out.stdout_lines
+  - name: Print return information from the previous task
+    ansible.builtin.debug:
+      var: myKernel
+      verbosity: 2
