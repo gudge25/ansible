@@ -16,3 +16,4 @@
   - name: return motd to registered var
     command: uname -r
     register: myKernel
+  - debug: myKernel=out.stdout_lines
