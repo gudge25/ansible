@@ -13,3 +13,6 @@
   - name: Shut down Debian flavored systems
     ansible.builtin.command: ls
     when: ansible_facts['os_family'] == "Archlinux"
+  - name: return motd to registered var
+    command: uname -r
+    register: myKernel
