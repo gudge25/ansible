@@ -13,10 +13,11 @@
   - name: Shut down Debian flavored systems
     ansible.builtin.command: ls
     when: ansible_facts['os_family'] == "Archlinux"
-  - name: return motd to registered var
-    command: uname -r
-    register: myKernel
-  - name: Print return information from the previous task
-    ansible.builtin.debug:
-      var: myKernel
-      verbosity: 2
+  - name: Show Kernel
+  #ToDo 
+  #figure out  OS release
+  # depending  on  OS release  use  yum  apt or  pacman 
+  #if  yum insall  epel  release 
+  #if  pacman install  yay
+  #install nano wget mc sngrep code 
+  
