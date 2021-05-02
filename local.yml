@@ -1,15 +1,28 @@
----
+  # talk to all hosts just so we can learn about them
 - hosts: localhost
-  remote_user: root
-  gather_facts: yes
-  become: false
   tasks:
-  - name: Distribution
-    debug: msg="{{ ansible_distribution }}"
-  - name: Install package foo from repo
-    community.general.pacman:
-      name: nano
-      state: present
-  - name: Shut down Debian flavored systems
-    ansible.builtin.command: ls
-    when: ansible_facts['os_family'] == "Archlinux"
+     - group_by: key=os_{{ ansible_distribution }}
+
+# now just on the hosts...
+
+- hosts: os_CentOS
+  gather_facts: False
+  tasks:
+     - # tasks that only happen on Archlinux go here
+     
+- hosts: os_Archlinux
+  gather_facts: False
+  tasks:
+    - name: Run the equivalent of "pacman -Sy" as a separate step
+      pacman:
+        update_cache: yes
+    - name: Install package foo from repo and bar from file
+      pacman:
+        name:
+        - nano
+        - git
+        - wget
+        - mc
+        state: present
+    - name: Execute the command in remote shell;
+      ansible.builtin.shell: yes | yay -S sngrep        
