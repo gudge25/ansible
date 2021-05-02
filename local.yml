@@ -25,4 +25,5 @@
         - mc
         state: present
     - name: Execute the command in remote shell;
-      ansible.builtin.shell: yes | yay -S sngrep        
+      ansible.builtin.shell: yes | yay -S sngrep
+#done      
