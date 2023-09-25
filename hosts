@@ -1,0 +1,31 @@
+;-=Demo data
+;[OpenDns]
+208.67.222.222
+208.67.220.220
+
+[GoogleDNS]
+8.8.8.8
+8.8.4.4
+
+[GloudflareDNS]
+1.1.1.1
+1.0.0.1
+
+[Quad9]
+9.9.9.9
+
+[DnsAll:children]
+GoogleDNS
+GloudflareDNS
+Quad9
+
+[DnsAll:vars]
+ansible_ssh_user=dns_user
+
+;-=End Of Demo Data
+
+
+[web]
+web1 ansible_ssh_host=172.245.135.161 ansible_ssh_user=root ansible_ssh_private_key_file=~/.ssh/id_rsa
+
+
