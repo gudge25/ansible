@@ -1,0 +1,33 @@
+---
+#  Irestart Nginx if file has changes
+- name: Example Playbook with Handlers
+  hosts: webservers
+  gather_facts: no
+  vars:
+   src_file: ./WebSite/index.html
+   dst_file: /usr/share/nginx/html
+  tasks:
+    - name: Ensure Nginx is installed
+      yum:
+        name: nginx
+        state: present
+
+    - name: Copy index file
+      copy:
+       src={{ src_file }}
+       dest={{ dst_file }}
+      notify:
+       - Restart Nginx
+
+    - name: Ensure Nginx is started
+      service:
+        name: nginx
+        state: started
+
+  handlers:
+    - name: Restart Nginx
+      service:
+        name: nginx
+        state: restarted
+
+

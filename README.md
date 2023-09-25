@@ -4,8 +4,7 @@ ansible usefull
 # configs
 /etc/ansible/ansible.cfg – Config file, used if present
 ~/.ansible.cfg – User config file, overrides the default config if present
-./ansible.cfg -- Local config file (in current working directory) assumed to  be  'project
-       specific' and overrides the rest if present.
+./ansible.cfg -- Local config file (in current working directory) assumed to  be  'project specific' and overrides the rest if present.
 # create  empty config  file in current/project directiry
 ansible-config init --format ini  --disabled  > ansible.cfg
 
@@ -50,3 +49,6 @@ ansible web -m service  -a "name=docker enabled=yes state=started"
 
 # Verbose -v to -vvvv
 ansible web -m yum  -a "name=mc state=absent" -v
+
+# Limit ansible playbook execution ho host/group
+ansible-playbook  getOS_name.yml --limit webservers

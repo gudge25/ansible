@@ -28,4 +28,5 @@ ansible_ssh_user=dns_user
 [web]
 web1 ansible_ssh_host=172.245.135.161 ansible_ssh_user=root ansible_ssh_private_key_file=~/.ssh/id_rsa
 
-
+[webservers]
+172.245.135.161
