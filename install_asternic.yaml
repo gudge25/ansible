@@ -1,6 +1,6 @@
 ---
 - name: Install Asternic Devel
-  hosts: "{{ server_name }}"
+  hosts: all
   gather_facts: no
   tasks:
     - name: Download
