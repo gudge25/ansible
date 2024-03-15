@@ -9,4 +9,10 @@
         dest: /usr/src
     - name: Change directory, extract files, and list contents
       command: cd /usr/src && tar zxvf asternic-stats-* && cd asternic-stats-*
- 
+    - name: Run sudo make install
+      expect:
+        command: sudo make install
+        responses:
+          'Please enter the MySQL root password:': "\n"
+          'Select a password for the \'admin\' user:': "admin\n"
+          'Confirm the password for the \'admin\' user:': "admin\n"
