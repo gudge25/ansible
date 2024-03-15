@@ -17,6 +17,5 @@
         chdir: /usr/src/asternic-stats-devel-2.3.9
         command: sudo make install
         responses:
-          - (?i)password: ''
-          - (?i)user: '12345'
-          - (?i)user: '12345'
+          '.*[Pp]assword.*': ''
+          '.*[Uu]ser.*': '12345'
