@@ -11,7 +11,7 @@
       shell: cd /usr/src && tar zxvf asternic-stats-*
     - name: Run sudo make install
       expect:
-        command: cd /usr/src/asternic-stats-* && sudo make install
+        command: cd /usr/src/asternic-stats-devel-2.3.9 && sudo make install
         responses:
           (?i)password: ''
           (?i)user: 'admin'
