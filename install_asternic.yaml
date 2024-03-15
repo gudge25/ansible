@@ -8,5 +8,5 @@
         url: "{{ ASTERNIC_DEV_URL }}"
         dest: /usr/src
     - name: cd and execute
-      command: cd /usr/src && tar zxvf asternic-stats-* && cd asternic-stats-*
+      command: cd /usr/src && tar zxvf asternic-stats-* && cd asternic-stats-* && ls
  
