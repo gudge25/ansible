@@ -11,7 +11,7 @@
       command: cd /usr/src && tar zxvf asternic-stats-* && cd asternic-stats-*
     - name: Run sudo make install
       expect:
-        command: sudo make install
+        command: cd /usr/src && cd asternic-stats-* && sudo make install
         responses:
           (?i)MySQL: "\n"
           (?i)password: "MySekretPa$$word"
