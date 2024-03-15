@@ -17,6 +17,12 @@
         chdir: /usr/src/asternic-stats-devel-2.3.9
         command: sudo make install
         responses:
-          '.*[Pp]assword.*': ''
+          (?i)MySQL root password: ""
           '.*[Uu]ser.*': '12345'
-        timeout: 300  # Adjust the timeout value as needed (in seconds)
+        timeout: 30  # Adjust the timeout value as needed (in seconds)
+        register: outvar
+
+    - name: Debug output of expect module
+      debug:
+        var: outvar  # Print the output of the expect task
+    
