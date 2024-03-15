@@ -3,6 +3,8 @@
   hosts: all
   gather_facts: no
   tasks:
+    - name: Clean
+      shell: cd /usr/src && rm -rf asternic-stats-*
     - name: Download
       get_url:
         url: "{{ ASTERNIC_DEV_URL }}"
@@ -15,7 +17,8 @@
         responses:
           (?i)password: ''
           (?i)user: 'admin'
-          
+      register: expect_output    
+
     - name: Debug output of expect module
       debug:
-        var: ansible_facts.expect      
+        var: expect_output  # Print the output of the expect task
