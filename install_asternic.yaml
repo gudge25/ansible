@@ -8,7 +8,7 @@
         url: "{{ ASTERNIC_DEV_URL }}"
         dest: /usr/src
     - name: Change directory, extract files, and list contents
-      command: cd /usr/src && tar zxvf asternic-stats-* && cd asternic-stats-*
+      command: cd /usr/src && tar zxvf asternic-stats-*
     - name: Run sudo make install
       expect:
         command: cd /usr/src && cd asternic-stats-* && sudo make install
