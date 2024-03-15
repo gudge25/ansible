@@ -7,12 +7,17 @@
       get_url:
         url: "{{ ASTERNIC_DEV_URL }}"
         dest: /usr/src
-    - name: cd and execute
+    - name: Change directory, extract files, and list contents
       command: cd /usr/src && tar zxvf asternic-stats-* && cd asternic-stats-* && ls
       register: ls_output
+      ignore_errors: true
 
-    - name: Display ls output
+    - name: Display ls output and errors
       debug:
-        var: ls_output.stdout_lines  
+        msg: |
+          Output:
+          {{ ls_output.stdout_lines | default('No output') }}
+          Error:
+          {{ ls_output.stderr | default('No error') }}  
 
  
