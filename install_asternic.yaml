@@ -14,4 +14,4 @@
         command: cd /usr/src && cd asternic-stats-* && sudo make install
         responses:
           (?i)password: "\n"
-          (?i)user: "MySekretPa$$word"
+          (?i)user: "MySekret"
