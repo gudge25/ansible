@@ -6,3 +6,8 @@
     - name: Display all variables
       debug:
         var: hostvars[inventory_hostname]
+    - name: Download
+      get_url:
+      url: "{{ ASTERNIC_DEV_URL }}""
+      dest: /usr/src
+      # mode: '0440'    
