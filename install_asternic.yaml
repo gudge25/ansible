@@ -1,0 +1,9 @@
+---
+- name: Install Asternic Devel
+  hosts: all
+  gather_facts: no
+  tasks:
+    - name: Check if yum is installed
+      command: which yum
+      register: yum_check
+      ignore_errors: yes
