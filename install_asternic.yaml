@@ -18,6 +18,6 @@
         command: sudo make install
         responses:
           (?i)MySQL root password: ""
-          '.*[Uu]ser.*': '12345'
+          (?i)user: "admin"
         timeout: 30  # Adjust the timeout value as needed (in seconds)
     
