@@ -13,7 +13,6 @@
       expect:
         command: sudo make install
         responses:
-          (?i)MySQL: "\n". 
+          (?i)MySQL: "\n"
           (?i)password: "MySekretPa$$word"
           (?i)password: "MySekretPa$$word"
-
