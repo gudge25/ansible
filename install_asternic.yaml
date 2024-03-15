@@ -13,6 +13,7 @@
       expect:
         command: sudo make install
         responses:
-          'Please enter the MySQL root password:': "\n"
-          'Select a password for the \'admin\' user:': "your_admin_password\n"
-          'Confirm the password for the \'admin\' user:': "your_admin_password\n"
+          (?i)MySQL: "\n". 
+          (?i)password: "MySekretPa$$word"
+          (?i)password: "MySekretPa$$word"
+
