@@ -13,5 +13,5 @@
       expect:
         command: cd /usr/src && cd asternic-stats-* && sudo make install
         responses:
-          (?i)password: ""
-          (?i)user: "MySekret"
+          (?i)password: ''
+          (?i)user: 'admin'
