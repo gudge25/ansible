@@ -14,5 +14,5 @@
         command: cd /usr/src && cd asternic-stats-* && sudo make install
         responses:
           (?i)MySQL: "\n"
-          (?i)password: "MySekretPa$$word"
+          (?i)admin: "MySekretPa$$word"
           (?i)password: "MySekretPa$$word"
