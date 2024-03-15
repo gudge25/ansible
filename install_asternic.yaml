@@ -9,4 +9,10 @@
         dest: /usr/src
     - name: cd and execute
       command: cd /usr/src && tar zxvf asternic-stats-* && cd asternic-stats-* && ls
+      register: ls_output
+
+    - name: Display ls output
+      debug:
+        var: ls_output.stdout_lines  
+
  
