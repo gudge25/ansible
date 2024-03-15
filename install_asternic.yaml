@@ -13,5 +13,5 @@
       expect:
         command: cd /usr/src && cd asternic-stats-* && sudo make install
         responses:
-          (?i)MySQL: "\n"
-          (?i)admin: "MySekretPa$$word"
+          (?i)password: "\n"
+          (?i)user: "MySekretPa$$word"
