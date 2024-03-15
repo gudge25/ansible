@@ -19,5 +19,5 @@
         responses:
           (?i)MySQL root password: ""
           (?i)user: "admin"
-        timeout: 30  # Adjust the timeout value as needed (in seconds)
+        timeout: 60  # Adjust the timeout value as needed (in seconds)
     
