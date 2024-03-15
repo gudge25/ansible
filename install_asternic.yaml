@@ -22,3 +22,7 @@
         timeout: 60  # Adjust the timeout value as needed (in seconds)
       register: expect_example_result
       failed_when: "expect_example_result.rc != 0 and 'Done' not in expect_example_result.stdout"
+    - name: Debug
+      debug:
+        var: expect_example_result  # Print the output of the expect task
+ 
