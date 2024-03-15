@@ -19,3 +19,4 @@
         responses:
           '.*[Pp]assword.*': ''
           '.*[Uu]ser.*': '12345'
+        timeout: 300  # Adjust the timeout value as needed (in seconds)
