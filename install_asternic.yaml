@@ -17,8 +17,3 @@
         responses:
           (?i)password: ''
           (?i)user: 'admin'
-      register: expect_output    
-
-    - name: Debug output of expect module
-      debug:
-        var: expect_output  # Print the output of the expect task
