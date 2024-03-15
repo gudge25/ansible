@@ -14,7 +14,8 @@
     - name: Run sudo make install
       expect:
         echo: true
-        command: cd /usr/src/asternic-stats-devel-2.3.9 && sudo make install
+        chdir: /usr/src/asternic-stats-devel-2.3.9
+        command: sudo make install
         responses:
           (?i)password: ''
           (?i)user: 'admin'
