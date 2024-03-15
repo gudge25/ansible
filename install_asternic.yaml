@@ -1,6 +1,6 @@
 ---
 - name: Install Asternic Devel
-  hosts: {{ server_name }}
+  hosts: "{{ server_name }}"
   gather_facts: no
   tasks:
     - name: Check if yum is installed
