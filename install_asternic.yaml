@@ -15,4 +15,3 @@
         responses:
           (?i)MySQL: "\n"
           (?i)admin: "MySekretPa$$word"
-          (?i)password: "MySekretPa$$word"
