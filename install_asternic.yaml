@@ -20,4 +20,6 @@
           - (?i)MySQL root password: ""
           - (?i)user: "admin"
         timeout: 60  # Adjust the timeout value as needed (in seconds)
+        register: expect_example_result
+        failed_when: "expect_example_result.rc != 0 or 'Done' not in expect_example_result.stdout"
     
