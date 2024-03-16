@@ -22,6 +22,7 @@
            (?i)user: 'your_admin_password\n'
     #     timeout: 90  # Adjust the timeout value as needed (in seconds)
       register: __expect_example_result
+      ignore_errors: true
     #  failed_when: "expect_example_result.rc != 0 and 'Done' not in expect_example_result.stdout"
     - name: Debug
       debug:
