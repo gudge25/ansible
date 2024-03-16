@@ -17,9 +17,9 @@
         chdir: /usr/src/asternic-stats-devel-2.3.9
         command: sudo make install
         responses:
-           (.*)MySQL(.*): ''
-           Select a password for the 'admin' user: '1234'
-           Confirm the password for the 'admin' user: '1234'
+           'Please enter the MySQL root password: ': ''
+           'Select a password for the \'admin\' user: ': '1234'
+           'Confirm the password for the \'admin\' user: ': '1234'
     #     timeout: 90  # Adjust the timeout value as needed (in seconds)
       register: __expect_example_result
       ignore_errors: true
