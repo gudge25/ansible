@@ -18,7 +18,8 @@
         command: sudo make install
         responses:
            (?i)MySQL root password: ''
-           (?i)user: 'your_admin_password\n'
+           Select a password for the(.*): 'password'
+           Confirm the password for the(.*): 'password'
     #     timeout: 90  # Adjust the timeout value as needed (in seconds)
       register: __expect_example_result
       ignore_errors: true
