@@ -3,14 +3,14 @@
   hosts: all
   gather_facts: no
   tasks:
-    - name: Clean
-      shell: cd /usr/src && rm -rf asternic-stats-*
-    - name: Download
-      get_url:
-        url: "{{ ASTERNIC_DEV_URL }}"
-        dest: /usr/src
-    - name: Change directory, extract files, and list contents
-      shell: cd /usr/src && tar zxvf asternic-stats-*
+    # - name: Clean
+    #   shell: cd /usr/src && rm -rf asternic-stats-*
+    # - name: Download
+    #   get_url:
+    #     url: "{{ ASTERNIC_DEV_URL }}"
+    #     dest: /usr/src
+    # - name: Change directory, extract files, and list contents
+    #   shell: cd /usr/src && tar zxvf asternic-stats-*
     - name: Run sudo make install
       expect:
         echo: yes
