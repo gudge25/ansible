@@ -17,7 +17,7 @@
         chdir: /usr/src/asternic-stats-devel-2.3.9
         command: sudo make install
         responses:
-           (?i)MySQL root password: ''
+           (.*)MySQL(.*): ''
            (.*)admin(.*): '12345'
     #     timeout: 90  # Adjust the timeout value as needed (in seconds)
       register: __expect_example_result
