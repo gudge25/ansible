@@ -13,16 +13,16 @@
       shell: cd /usr/src && tar zxvf asternic-stats-*
     - name: Run sudo make install
       expect:
-        echo: true
+        echo: yes
         chdir: /usr/src/asternic-stats-devel-2.3.9
         command: sudo make install
         responses:
            (?i)MySQL root password: ""
            (?i)user: "admin"
-        timeout: 90  # Adjust the timeout value as needed (in seconds)
-      register: expect_example_result
-      failed_when: "expect_example_result.rc != 0 and 'Done' not in expect_example_result.stdout"
+    #     timeout: 90  # Adjust the timeout value as needed (in seconds)
+      register: __expect_example_result
+    #  failed_when: "expect_example_result.rc != 0 and 'Done' not in expect_example_result.stdout"
     - name: Debug
       debug:
-        var: expect_example_result  # Print the output of the expect task
+        var: __expect_example_result  # Print the output of the expect task
  
