@@ -20,9 +20,8 @@
           #  'Please enter the MySQL root password: ': ''
           #  'Select a password for the \'admin\' user: ': '1234'
           #  'Confirm the password for the \'admin\' user: ': '1234'
-          'Enter current password for root \(enter for none\): ': ''
-          'Set root password\? \[Y\/n\] ': 'n'
-          'Remove anonymous users\? \[Y\/n\] ': 'y'
+          'Select a password for the 'admin' user:': '1234'
+          'Confirm the password for the 'admin' user:': '1234'
     #     timeout: 90  # Adjust the timeout value as needed (in seconds)
       register: __expect_example_result
       ignore_errors: true
