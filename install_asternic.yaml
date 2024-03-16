@@ -20,7 +20,7 @@
           "Please enter the MySQL root password:": ''
           "(?i)Select a password for the 'admin' user:": "admin_password\n"
           "(?i)Confirm the password for the 'admin' user:": "admin_password\n"
-        timeout: 90  # Adjust the timeout value as needed (in seconds)
+        timeout: 120  # Adjust the timeout value as needed (in seconds)
       no_log: false  
       register: __expect_example_result
       ignore_errors: true
