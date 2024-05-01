@@ -1,0 +1,15 @@
+---
+- name: Retrieve number of PJSIP
+  gather_facts: false
+  hosts: all
+  vars:
+    ansible_ssh_timeout: 60 # Set SSH timeout to 60 seconds
+  tasks:
+    - name: Execute Asterisk command and capture output for PJSIP
+      ansible.builtin.shell: asterisk -rx "pjsip show endpoints" |grep Endpoint  |grep -Ecv "dpma_endpoint|Identify|Channels"
+      register: asterisk_output
+      changed_when: false
+
+    - name: Print number of objects found
+      ansible.builtin.debug:
+        msg: "Server {{ inventory_hostname }}. Number of PJSIP found : {{ asterisk_output.stdout }}"
