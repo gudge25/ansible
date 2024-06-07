@@ -29,7 +29,8 @@ jobs:
       - name: Install NPM
         run: |
           # sudo apt install npm -y
-          node --version
+          npm install @salesforce/cli --global
+          sf --version
       # # Install the SFDX CLI using npm command
       # - name: Install the SFDX CLI
       #   run: |
