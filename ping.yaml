@@ -1,6 +1,6 @@
 ---
 - name: Ping test
-  hosts: {{ target_hosts | default('all') }}
+  hosts: "{{ target_hosts | default('all') }}"
   gather_facts: no
   tasks:
     - name: Ping
