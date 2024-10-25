@@ -23,4 +23,4 @@
         name: zabbix-agent
         state: restarted
     - name: Execute Asterisk command and capture output for PJSIP
-      comand: fwconsole firewall add trusted zabbix.gixo.co.uk   
+      command: fwconsole firewall add trusted zabbix.gixo.co.uk   
