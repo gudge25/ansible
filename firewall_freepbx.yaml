@@ -1,0 +1,14 @@
+---
+- name: Firewall FreePBX
+  hosts: all
+  tasks:
+    - name: Add custom UserParameter to zabbix_agentd.conf
+      lineinfile:
+        path: /etc/zabbix_agentd.conf
+        line: "UserParameter=firewall.status,/bin/bash -c '[ -f /etc/asterisk/firewall.enabled ]; echo $?'"
+        state: present
+
+    - name: Restart Zabbix Agent
+      service:
+        name: zabbix-agent
+        state: restarted
