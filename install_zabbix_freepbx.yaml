@@ -1,0 +1,26 @@
+---
+- name: Install Zabbix Agent on XCP-NG Servers
+  hosts: "{{target_hosts | default('all') }}"
+  gather_facts: no # Disable gathering facts
+  tasks:
+    - name: Install Zabbix 40 Agent
+      yum:
+        name: zabbix40-agent
+        state: present
+    - name: Update Zabbix server address in zabbix_agentd.conf
+      lineinfile:
+        path: /etc/zabbix_agentd.conf
+        regexp: '^Server='
+        line: 'Server=127.0.0.1,zabbix.gixo.co.uk'
+        state: present 
+    - name: Start and enable Zabbix Agent
+      systemd:
+        name: zabbix-agent
+        enabled: yes
+        state: started
+    - name: Restart Zabbix Agent
+      systemd:
+        name: zabbix-agent
+        state: restarted
+    - name: Execute Asterisk command and capture output for PJSIP
+      comand: fwconsole firewall add trusted zabbix.gixo.co.uk   
