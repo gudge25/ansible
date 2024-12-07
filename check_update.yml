@@ -2,8 +2,6 @@
 - hosts: "{{ target_hosts | default('all') }}"
   remote_user: root
   gather_facts: no
-  roles:
-    - basic_programs
   tasks:
     - shell: yum check-update | wc -l
       register: count
