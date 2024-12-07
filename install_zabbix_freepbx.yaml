@@ -11,7 +11,7 @@
       lineinfile:
         path: /etc/zabbix_agentd.conf
         regexp: '^Server='
-        line: 'Server=127.0.0.1,zabbix.gixo.co.uk'
+        line: 'Server=127.0.0.1,{{ZABBIX_SERVER}}'
         state: present 
     - name: Start and enable Zabbix Agent
       systemd:
