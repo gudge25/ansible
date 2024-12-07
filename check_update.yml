@@ -5,6 +5,10 @@
   tasks:
     - shell: yum check-update | wc -l
       register: count
+    - name: Update all packages
+      yum: 
+        name: "*"
+        state: latest
     
 
     - debug: var=count.stdout_lines
