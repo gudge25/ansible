@@ -26,6 +26,29 @@ pre-commit install
 - `.yamllint`: YAML syntax checking configuration
 - `ansible.cfg`: Ansible configuration file
 
+## Linting Configuration
+
+The project uses two different linting configurations:
+
+### .yamllint
+Handles generic YAML syntax and formatting:
+- Indentation and spacing
+- Line length
+- Quote consistency
+- Document structure
+- Comments formatting
+
+### .ansible-lint
+Focuses on Ansible-specific best practices:
+- Module usage and naming
+- Task structure
+- Security practices
+- Role organization
+- Variable naming conventions
+- Deprecated feature detection
+
+Together, these ensure both proper YAML formatting and Ansible best practices are followed.
+
 ## Available Playbooks
 
 ### System Information
