@@ -20,11 +20,10 @@
           "Please enter the MySQL root password:": ''
           "(.*)user:": "admin_password\n"
         timeout: 120  # Adjust the timeout value as needed (in seconds)
-      no_log: false  
+      no_log: false
       register: __expect_example_result
       ignore_errors: true
     #  failed_when: "expect_example_result.rc != 0 and 'Done' not in expect_example_result.stdout"
     - name: Debug
       debug:
         var: __expect_example_result  # Print the output of the expect task
- 

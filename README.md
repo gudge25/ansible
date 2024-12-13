@@ -1,5 +1,5 @@
 # ansible
-ansible usefull 
+ansible usefull
 
 # configs
 /etc/ansible/ansible.cfg – Config file, used if present
@@ -29,7 +29,7 @@ ansible all -m command -a "uptime"
 # Shell command
 ansible all -m shell -a "uptime"
 
-# Copy file 
+# Copy file
 ansible web -m copy -a "src=test.txt dest=/tmp"
 (optional)    -b, --become  run operations with become (does not imply password prompting)
 
@@ -44,7 +44,7 @@ ansible web -m yum  -a "name=mc state=latest"
 # Remove app with yum
 ansible web -m yum   -a "name=mc state=absent"
 
-# Change Service state 
+# Change Service state
 ansible web -m service  -a "name=docker enabled=yes state=started"
 
 # Verbose -v to -vvvv

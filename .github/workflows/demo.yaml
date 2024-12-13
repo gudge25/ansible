@@ -17,7 +17,7 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
-      
+
   build:
     runs-on: ubuntu-latest
     steps:
@@ -25,7 +25,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          
+
       - name: Install NPM
         run: |
           # sudo apt install npm -y

@@ -1,4 +1,4 @@
-apt install   # talk to all hosts just so we can learn about them
+# talk to all hosts just so we can learn about them
 - hosts: localhost
   tasks:
      - group_by: key=os_{{ ansible_distribution }}
@@ -9,7 +9,7 @@ apt install   # talk to all hosts just so we can learn about them
   gather_facts: False
   tasks:
      - # tasks that only happen on Archlinux go here
-     
+
 - hosts: os_Archlinux
   gather_facts: False
   tasks:
@@ -26,6 +26,3 @@ apt install   # talk to all hosts just so we can learn about them
         state: present
     - name: Execute the command in remote shell;
       ansible.builtin.shell: yes | yay -S sngrep
-#done      
-#TODO
-#TODO

@@ -12,7 +12,7 @@
         path: /etc/zabbix_agentd.conf
         regexp: '^Server='
         line: 'Server=127.0.0.1,{{ZABBIX_SERVER}}'
-        state: present 
+        state: present
     - name: Start and enable Zabbix Agent
       systemd:
         name: zabbix-agent
@@ -23,4 +23,4 @@
         name: zabbix-agent
         state: restarted
     - name: Execute Asterisk command and capture output for PJSIP
-      command: fwconsole firewall add trusted zabbix.gixo.co.uk   
+      command: fwconsole firewall add trusted zabbix.gixo.co.uk
