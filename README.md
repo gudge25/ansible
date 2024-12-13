@@ -1,24 +1,67 @@
-# ansible
-ansible usefull
+# Ansible Playbooks Collection
 
-# configs
-/etc/ansible/ansible.cfg – Config file, used if present
-~/.ansible.cfg – User config file, overrides the default config if present
-./ansible.cfg -- Local config file (in current working directory) assumed to  be  'project specific' and overrides the rest if present.
-# create  empty config  file in current/project directiry
-ansible-config init --format ini  --disabled  > ansible.cfg
+A collection of useful Ansible playbooks for system configuration and management.
 
-# aplly ansible.cfg as default (optional)
-export ANSIBLE_CONFIG=ansible.cfg
+## Setup
 
-# show hosts file  hosts
-ansible all  --list-hosts
-or
+### Prerequisites
+- Ansible installed
+- Python 3.x
+- pip (Python package manager)
+
+### Pre-commit Setup
+1. Install pre-commit:
+```bash
+pip install pre-commit
+```
+
+2. Install the git hooks:
+```bash
+pre-commit install
+```
+
+### Configuration Files
+- `.pre-commit-config.yaml`: Defines pre-commit hooks for code quality
+- `.ansible-lint`: Ansible linting configuration
+- `.yamllint`: YAML syntax checking configuration
+- `ansible.cfg`: Ansible configuration file
+
+## Available Playbooks
+
+### System Information
+- `getOS_name.yml`: Get OS distribution information
+- `getOS_V2.yml`: Alternative version for OS information
+- `local.yml`: Local system configuration
+
+### Web Server
+- `install-nginx.yaml`: Install and configure Nginx
+- `install-default.yaml`: Default installation playbook
+
+### Monitoring
+- `install_zabbix_freepbx.yaml`: Zabbix installation for FreePBX
+- `install_asternic.yaml`: Asternic installation
+
+### Network
+- `firewall_freepbx.yaml`: Firewall configuration for FreePBX
+- `pjsip_numbers.yaml`: PJSIP configuration
+
+## Usage
+
+### Basic Commands
+```bash
+# Check hosts
+ansible all --list-hosts
 ansible-inventory --graph
-ansible-inventory --graph  --vars
+ansible-inventory --graph --vars
 
-# ansible PING
+# Ping test
 ansible -m ping all
+
+# Get server info
+ansible web -m setup
+
+# Run playbook
+ansible-playbook playbook.yml
 
 # Info from Servers(s)
 ansible web -m setup
