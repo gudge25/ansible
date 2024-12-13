@@ -1,0 +1,27 @@
+---
+skip_list:
+  - 'fqcn'  # Skip all FQCN-related rules
+  - 'fqcn[action]'
+  - 'fqcn[action-core]'
+  - 'name[template]'  # Allow templates in task names
+  - 'yaml[line-length]'  # Don't enforce line length
+  - 'yaml[truthy]'  # Don't enforce true/false format
+  - 'var-naming'
+  - 'name[casing]'
+  - 'name[play]'
+
+warn_list:
+  - 'experimental'  # Allow experimental features
+  - 'ignore-errors'
+  - 'no-handler'
+
+exclude_paths:
+  - .git/
+  - .github/
+  - .tox/
+  - .cache/
+  - .pytest_cache/
+  - tests/
+
+use_default_rules: true
+offline: true  # Don't make any network calls

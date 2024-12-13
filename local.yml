@@ -1,28 +1,35 @@
-# talk to all hosts just so we can learn about them
+---
+# Group hosts by OS distribution
 - hosts: localhost
   tasks:
-     - group_by: key=os_{{ ansible_distribution }}
-
-# now just on the hosts...
+    - name: Group hosts by OS distribution
+      group_by:
+        key: "os_{{ ansible_distribution }}"
 
 - hosts: os_CentOS
-  gather_facts: False
+  gather_facts: false
   tasks:
-     - # tasks that only happen on Archlinux go here
+    - name: CentOS specific tasks
+      debug:
+        msg: "No tasks defined for CentOS yet"
 
 - hosts: os_Archlinux
-  gather_facts: False
+  gather_facts: false
   tasks:
-    - name: Run the equivalent of "pacman -Sy" as a separate step
+    - name: Update package cache
       pacman:
-        update_cache: yes
-    - name: Install package foo from repo and bar from file
+        update_cache: true
+
+    - name: Install required packages
       pacman:
         name:
-        - nano
-        - git
-        - wget
-        - mc
+          - nano
+          - git
+          - wget
+          - mc
         state: present
-    - name: Execute the command in remote shell;
-      ansible.builtin.shell: yes | yay -S sngrep
+
+    - name: Install sngrep using yay
+      ansible.builtin.command: yay -S sngrep --noconfirm
+      args:
+        creates: /usr/bin/sngrep  # Only run if sngrep is not installed
