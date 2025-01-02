@@ -1,5 +1,15 @@
 ---
-- name: install nano
+- name: Check if yum is installed
+  command: which yum
+  register: yum_check
+  ignore_errors: yes
+
+- name: Ensure multiple packages are installed
   yum:
-    name: nano  # package name
-    state: present
+    name:
+      - mc
+      - git
+      - nano
+      - wget
+    state: latest
+  when: yum_check.rc == 0
