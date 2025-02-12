@@ -11,6 +11,13 @@
     line: "Server=127.0.0.1,{{ ZABBIX_SERVER }}"
     state: present
 
+- name: Add custom UserParameter to the end of zabbix_agentd.conf
+  lineinfile:
+    path: /etc/zabbix_agentd.conf
+    line: 'UserParameter=custom.mdstat,cat /proc/mdstat | grep -c _'
+    insertafter: EOF
+    state: present
+
 - name: Enable and start Zabbix agent
   systemd:
     name: zabbix-agent
