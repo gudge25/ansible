@@ -9,5 +9,5 @@ This role installs and configures the Zabbix Agent on XCP-ng.
 ```
 
 ## Variables
-- `zabbix_server`: Zabbix server address.
-- `ZABBIX_AGENT_VERSION`: Version of the Zabbix agent to install.
+- `ZABBIX_SERVER`: Zabbix server address.
+- `ZABBIX_AGENT_VERSION`: Version of the Zabbix agent to install. e.g. "50".
