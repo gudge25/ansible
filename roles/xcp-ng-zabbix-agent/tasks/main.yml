@@ -16,3 +16,10 @@
     name: zabbix-agent
     enabled: yes
     state: restarted
+
+- name: Add Zabbix TCP port rule after specific line
+  lineinfile:
+    path: /etc/sysconfig/iptables
+    line: '-A RH-Firewall-1-INPUT -p tcp -m tcp --dport 10050 -j ACCEPT'
+    insertafter: '^.*--dport 21064.*$'
+    state: present
