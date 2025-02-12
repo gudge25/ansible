@@ -1,0 +1,11 @@
+- name: Install Zabbix agent
+  yum:
+    name: "zabbix{{ ZABBIX_AGENT_VERSION }}-agent"
+    state: present
+    enablerepo: epel
+    
+- name: Enable and start Zabbix agent
+  systemd:
+    name: zabbix-agent
+    enabled: yes
+    state: started    
