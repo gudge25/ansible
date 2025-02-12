@@ -39,7 +39,7 @@
 - name: Add Zabbix host with template and group
   community.zabbix.zabbix_host:
     server_url: "http://{{ ZABBIX_SERVER }}"
-    login_user: "{{ ZABBIX_API_USER }}"
+    login_user: "Admin"
     login_password: "{{ ZABBIX_API_PASSWORD }}"
     hostname: "{{ ansible_default_ipv4.address }}"
     groups:
