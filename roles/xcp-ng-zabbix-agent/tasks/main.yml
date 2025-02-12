@@ -15,7 +15,7 @@
   systemd:
     name: zabbix-agent
     enabled: yes
-    state: restarted
+    state: started
 
 - name: Add Zabbix TCP port rule after specific line
   lineinfile:
