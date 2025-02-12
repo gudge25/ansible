@@ -3,9 +3,16 @@
     name: "zabbix{{ ZABBIX_AGENT_VERSION }}-agent"
     state: present
     enablerepo: epel
-    
+
+- name: Update Zabbix server address in zabbix_agentd.conf
+  lineinfile:
+    path: /etc/zabbix_agentd.conf
+    regexp: '^Server='
+    line: "Server=127.0.0.1,{{ ZABBIX_SERVER }}"
+    state: present
+
 - name: Enable and start Zabbix agent
   systemd:
     name: zabbix-agent
     enabled: yes
-    state: started    
+    state: restarted

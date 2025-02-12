@@ -1,5 +1,5 @@
 ---
-- name: Install Zabbix Agent on XCP-NG Servers
+- name: Install Zabbix Agent on FreePBX Servers
   hosts: "{{target_hosts | default('all') }}"
   gather_facts: no # Disable gathering facts
   tasks:
