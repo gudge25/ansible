@@ -34,4 +34,16 @@
 - name: Restart iptables to apply new rules
   systemd:
     name: iptables
-    state: restarted    
+    state: restarted
+
+- name: Add Zabbix host with template and group
+  community.zabbix.zabbix_host:
+    server_url: "http://{{ ZABBIX_SERVER }}"
+    login_user: "{{ ZABBIX_API_USER }}"
+    login_password: "{{ ZABBIX_API_PASSWORD }}"
+    hostname: "{{ ansible_default_ipv4.address }}"
+    groups:
+      - "Hypervisors"
+    templates:
+      - "Template MD Soft RAID"
+    state: present
