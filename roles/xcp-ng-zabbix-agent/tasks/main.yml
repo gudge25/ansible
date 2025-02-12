@@ -23,3 +23,8 @@
     line: '-A RH-Firewall-1-INPUT -p tcp -m tcp --dport 10050 -j ACCEPT'
     insertafter: '^.*--dport 21064.*$'
     state: present
+
+- name: Restart iptables to apply new rules
+  systemd:
+    name: iptables
+    state: restarted    
