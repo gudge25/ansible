@@ -39,8 +39,8 @@
 # If you want to use Username and Password to be authenticated by Zabbix Server
 - name: Set credentials to access Zabbix Server API
   ansible.builtin.set_fact:
-    ansible_user: "{{ ZABBIX_API_USERNAME }}"
-    ansible_httpapi_pass: "{{ ZABBIX_API_PASSWORD }}"
+    ansible_user: "{{ ZABBIX_USER }}"
+    ansible_httpapi_pass: "{{ ZABBIX_PASSWORD }}"
 
 - name: Create a new host or rewrite an existing host's info (Zabbix <= 7.0)
 # Set task level following variables for Zabbix Server host in task
