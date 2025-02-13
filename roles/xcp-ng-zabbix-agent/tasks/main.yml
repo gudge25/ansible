@@ -61,5 +61,12 @@
     link_templates:
       - Template MD Soft RAID 
     force: true
+    interfaces:
+      - type: 1  # Agent interface (type 1 for Zabbix agent)
+        main: 1
+        useip: 1
+        ip: "{{ ansible_default_ipv4.address }}"  # IP address of the host
+        dns: ""
+        port: "10050"  # Zabbix agent port (default 10050)
 
 
