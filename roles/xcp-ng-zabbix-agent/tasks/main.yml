@@ -72,7 +72,7 @@
         ip: "{{ ansible_default_ipv4.address }}"  # IP address of the host
         dns: ""
         port: "10050"  # Zabbix agent port (default 10050)
-    description: Added my Ansible role
+    description: Added by Ansible role
     tags:
       - tag: XCP-NG
       - tag: Ansible
