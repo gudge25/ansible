@@ -59,7 +59,9 @@
     host_groups:
       - Hypervisors
     link_templates:
-      - Template MD Soft RAID 
+      - Template MD Soft RAID
+    status: enabled
+    state: present  
     force: true
     interfaces:
       - type: 1  # Agent interface (type 1 for Zabbix agent)
@@ -68,5 +70,7 @@
         ip: "{{ ansible_default_ipv4.address }}"  # IP address of the host
         dns: ""
         port: "10050"  # Zabbix agent port (default 10050)
+    description: Added my Ansible role
+    
 
 
