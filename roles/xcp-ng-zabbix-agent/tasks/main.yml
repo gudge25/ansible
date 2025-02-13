@@ -30,11 +30,13 @@
     line: '-A RH-Firewall-1-INPUT -p tcp -m tcp --dport 10050 -j ACCEPT'
     insertafter: '^.*--dport 21064.*$'
     state: present
+  register: iptables_result  
 
 - name: Restart iptables to apply new rules
   systemd:
     name: iptables
     state: restarted
+  when: iptables_result.changed  
 
 # If you want to use Username and Password to be authenticated by Zabbix Server
 - name: Set credentials to access Zabbix Server API
@@ -72,9 +74,6 @@
         port: "10050"  # Zabbix agent port (default 10050)
     description: Added my Ansible role
     tags:
-      - tag: ExampleHostsTag
-      - tag: ExampleHostsTag2
-        value: ExampleTagValue
-    
-
-
+      - tag: XCP-NG
+      - tag: AnsibleInstalled
+        value: true
