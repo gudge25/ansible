@@ -75,5 +75,5 @@
     description: Added my Ansible role
     tags:
       - tag: XCP-NG
-      - tag: AnsibleInstalled
+      - tag: Ansible
         value: true
