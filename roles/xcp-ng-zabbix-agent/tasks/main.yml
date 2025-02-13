@@ -58,7 +58,7 @@
     visible_name: "{{ ansible_default_ipv4.address }}"
     host_groups:
       - Hypervisors
-    ink_templates:
+    link_templates:
       - Template MD Soft RAID 
     force: true
 
