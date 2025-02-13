@@ -36,14 +36,19 @@
     name: iptables
     state: restarted
 
-- name: Add Zabbix host with template and group
-  community.zabbix.zabbix_host:
-    server_url: "http://{{ ZABBIX_SERVER }}"
+- name: Authenticate with Zabbix API
+  community.zabbix.zabbix_auth:
+    server_url: "http://{{ ZABBIX_SERVER }}/api_jsonrpc.php"
     login_user: "{{ ZABBIX_API_USER }}"
     login_password: "{{ ZABBIX_API_PASSWORD }}"
+  register: zabbix_auth  # Stores the authentication token
+
+- name: Add Zabbix host with template and group
+  community.zabbix.zabbix_host:
     host_name: "{{ ansible_default_ipv4.address }}"
     host_groups:
       - "Hypervisors"
     link_templates:
       - "Template MD Soft RAID"
     state: present
+    auth_token: "{{ zabbix_auth.auth }}"
