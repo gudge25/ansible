@@ -36,19 +36,32 @@
     name: iptables
     state: restarted
 
-- name: Authenticate with Zabbix API
-  community.zabbix.zabbix_auth:
-    server_url: "http://{{ ZABBIX_SERVER }}/api_jsonrpc.php"
-    login_user: "{{ ZABBIX_API_USER }}"
-    login_password: "{{ ZABBIX_API_PASSWORD }}"
-  register: zabbix_auth  # Stores the authentication token
+# If you want to use Username and Password to be authenticated by Zabbix Server
+- name: Set credentials to access Zabbix Server API
+  ansible.builtin.set_fact:
+    ansible_user: "{{ ZABBIX_API_USERNAME }}"
+    ansible_httpapi_pass: "{{ ZABBIX_API_PASSWORD }}"
 
-- name: Add Zabbix host with template and group
+- name: Create a new host or rewrite an existing host's info (Zabbix <= 7.0)
+# Set task level following variables for Zabbix Server host in task
+  vars:
+    ansible_network_os: community.zabbix.zabbix
+    ansible_connection: httpapi
+    ansible_httpapi_port: 443
+    ansible_httpapi_use_ssl: true
+    ansible_httpapi_validate_certs: false
+    #ansible_zabbix_url_path: "zabbixeu"  # If Zabbix WebUI runs on non-default (zabbix) path ,e.g. http://<FQDN>/zabbixeu
+  become: false
+  delegate_to: "{{ ZABBIX_SERVER }}" # you can use delegate_to or task level ansible_host like next example
   community.zabbix.zabbix_host:
-    host_name: "{{ ansible_default_ipv4.address }}"
+    host_name: ExampleHost
+    visible_name: ExampleName
+    description: My ExampleHost Description
     host_groups:
-      - "Hypervisors"
+      - Example group1
+      - Example group2
     link_templates:
-      - "Template MD Soft RAID"
+      - Example template1
+      - Example template2
+    status: enabled
     state: present
-    auth_token: "{{ zabbix_auth.auth }}"
