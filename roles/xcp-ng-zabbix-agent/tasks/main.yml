@@ -42,8 +42,8 @@
     ansible_user: "{{ ZABBIX_USER }}"
     ansible_httpapi_pass: "{{ ZABBIX_PASSWORD }}"
 
-- name: Create a new host or rewrite an existing host's info (Zabbix <= 7.0)
-# Set task level following variables for Zabbix Server host in task
+- name: Update an existing host's TLS settings
+# Set current task level variables for Zabbix Server host in task
   vars:
     ansible_network_os: community.zabbix.zabbix
     ansible_connection: httpapi
@@ -51,17 +51,11 @@
     ansible_httpapi_use_ssl: true
     ansible_httpapi_validate_certs: false
     #ansible_zabbix_url_path: "zabbixeu"  # If Zabbix WebUI runs on non-default (zabbix) path ,e.g. http://<FQDN>/zabbixeu
+    ansible_host: "{{ ZABBIX_SERVER }}" # you can use task level ansible_host or delegate_to like in previous example
   become: false
-  delegate_to: "{{ ZABBIX_SERVER }}" # you can use delegate_to or task level ansible_host like next example
   community.zabbix.zabbix_host:
     host_name: ExampleHost
     visible_name: ExampleName
-    description: My ExampleHost Description
     host_groups:
       - Example group1
-      - Example group2
-    link_templates:
-      - Example template1
-      - Example template2
-    status: enabled
-    state: present
+    force: false
