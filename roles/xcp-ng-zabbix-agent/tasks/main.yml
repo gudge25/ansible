@@ -71,6 +71,10 @@
         dns: ""
         port: "10050"  # Zabbix agent port (default 10050)
     description: Added my Ansible role
+    tags:
+      - tag: ExampleHostsTag
+      - tag: ExampleHostsTag2
+        value: ExampleTagValue
     
 
 
