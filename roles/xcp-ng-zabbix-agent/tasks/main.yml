@@ -44,7 +44,7 @@
     ansible_user: "{{ ZABBIX_USER }}"
     ansible_httpapi_pass: "{{ ZABBIX_PASSWORD }}"
 
-- name: Update an existing host's TLS settings
+- name: Add Zabbix Server host
 # Set current task level variables for Zabbix Server host in task
   vars:
     ansible_network_os: community.zabbix.zabbix
