@@ -41,9 +41,9 @@
     server_url: "http://{{ ZABBIX_SERVER }}"
     login_user: "{{ ZABBIX_API_USER }}"
     login_password: "{{ ZABBIX_API_PASSWORD }}"
-    hostname: "{{ ansible_default_ipv4.address }}"
-    groups:
+    host_name: "{{ ansible_default_ipv4.address }}"
+    host_groups:
       - "Hypervisors"
-    templates:
+    link_templates:
       - "Template MD Soft RAID"
     state: present
