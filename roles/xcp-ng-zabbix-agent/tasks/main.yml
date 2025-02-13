@@ -54,8 +54,8 @@
     ansible_host: "{{ ZABBIX_SERVER }}" # you can use task level ansible_host or delegate_to like in previous example
   become: false
   community.zabbix.zabbix_host:
-    host_name: "{{ ansible_ipv4.address }}"
-    visible_name: "{{ ansible_ipv4.address }}"
+    host_name: "{{ ansible_default_ipv4.address }}"
+    visible_name: "{{ ansible_default_ipv4.address }}"
     host_groups:
       - Hypervisors
     ink_templates:
