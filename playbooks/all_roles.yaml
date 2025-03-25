@@ -1,7 +1,5 @@
 ---
 - hosts: all
-  vars:
-    ansible_roles_path: "../roles"
   #gather_facts: false
   roles:
     - common
