@@ -1,0 +1,11 @@
+---
+- name: Run one command and show output
+  hosts: "{{target_hosts | default('none') }}"
+  gather_facts: false
+  strategy: free
+  tasks:
+    - shell: "{{ shell_command }}"
+      register: count
+    - debug:
+        msg: "{{ count.stdout_lines | join(' ') }}"  
+    # - debug: var=count.stdout_lines
