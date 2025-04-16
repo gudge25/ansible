@@ -1,6 +1,6 @@
 ---
 - name: Run one command and show output
-  hosts: "{{target_hosts | default('none') }}"
+  hosts: "{{ target_hosts | default('none') }}"
   gather_facts: false
   strategy: free
   tasks:
