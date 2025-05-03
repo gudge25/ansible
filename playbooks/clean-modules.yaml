@@ -11,6 +11,17 @@
         fwconsole ma delete xmpp
         fwconsole ma delete vega
         fwconsole ma delete sipstation
+        fwconsole ma delete asterisk-cli
+        fwconsole ma delete versionupgrade
+        fwconsole ma delete webcallback
+        fwconsole ma delete sangomaconnect
+        fwconsole ma delete zulu
+        fwconsole ma delete sms
+        fwconsole ma delete digium_phones
+        fwconsole ma delete digiumaddoninstaller
+        fwconsole ma delete dahdiconfig
+        fwconsole ma delete sangomacrm
+        fwconsole ma delete phpinfo
 
       register: count
 
