@@ -22,6 +22,16 @@
         fwconsole ma delete dahdiconfig
         fwconsole ma delete sangomacrm
         fwconsole ma delete phpinfo
+        fwconsole ma delete conferencespro
+        fwconsole ma delete contactimage
+        fwconsole ma delete faxpro
+        fwconsole ma delete pagingpro
+        fwconsole ma delete broadcast
+        fwconsole ma delete callaccounting
+        fwconsole ma delete callerid
+        fwconsole ma delete calllimit
+        fwconsole ma delete oracle_connector
+        fwconsole ma delete sangomartapi
 
       register: count
 
