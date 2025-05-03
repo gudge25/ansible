@@ -1,18 +1,5 @@
 ---
 - hosts: all
-  #gather_facts: false
+  gather_facts: false
   roles:
     - common
-
-  tasks:
-    - name: Find all .tgz.gpg files in module cache
-      ansible.builtin.find:
-        paths: /var/www/html/admin/modules/_cache
-        patterns: "*.tgz.gpg"
-      register: files_to_delete
-
-    - name: Delete found files
-      ansible.builtin.file:
-        path: "{{ item.path }}"
-        state: absent
-      loop: "{{ files_to_delete.files }}"
