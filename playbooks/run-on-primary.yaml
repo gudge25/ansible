@@ -1,0 +1,12 @@
+---
+- name: Run task only on primary servers
+  hosts: all
+  gather_facts: no
+  vars:
+    base_name: "{{ inventory_hostname | regex_replace('2\\.', '.') | regex_replace('\\..*', '') }}"
+    is_primary: "{{ not inventory_hostname.startswith(base_name ~ '2.') }}"
+
+  tasks:
+    - name: Ping from primary
+      ping:
+      when: is_primary
