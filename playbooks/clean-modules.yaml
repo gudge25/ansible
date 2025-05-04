@@ -32,6 +32,8 @@
         fwconsole ma delete calllimit
         fwconsole ma delete oracle_connector
         fwconsole ma delete sangomartapi
+        fwconsole ma delete parkpro
+        fwconsole ma delete pinsetspro
 
       register: count
 
