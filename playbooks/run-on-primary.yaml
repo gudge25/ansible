@@ -5,10 +5,8 @@
   vars:
     # Всі хости в інвентарі
     all_hosts: "{{ groups['all'] }}"
-
     # Знаходимо всі backup-хости (мають '2.' після префікса)
     backup_names: "{{ all_hosts | select('search', '^[^.]+2\\..+') | list }}"
-
     # Витягуємо первинні імена хостів, прибравши '2' перед першою крапкою
     primary_names: "{{ backup_names | map('regex_replace', '^([^.]+)2(\\..+)', '\\1\\2') | list }}"
 

@@ -1,0 +1,4 @@
+---
+# defaults file for roles/firewall_sync
+file_name: "sync-fw-trusted.sh"
+divisor: "3"
