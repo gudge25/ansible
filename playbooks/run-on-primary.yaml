@@ -1,7 +1,7 @@
 ---
 - name: Run task only on primary servers
   hosts: all
-  gather_facts: no
+  gather_facts: false
   vars:
     base_name: "{{ inventory_hostname | regex_replace('2\\.', '.') | regex_replace('\\..*', '') }}"
     is_primary: "{{ not inventory_hostname.startswith(base_name ~ '2.') }}"
