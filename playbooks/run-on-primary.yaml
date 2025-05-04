@@ -3,10 +3,16 @@
   hosts: all
   gather_facts: false
   vars:
-    base_name: "{{ inventory_hostname | regex_replace('2\\.', '.') | regex_replace('\\..*', '') }}"
-    is_primary: "{{ not inventory_hostname.startswith(base_name ~ '2.') }}"
+    # Всі хости в інвентарі
+    all_hosts: "{{ groups['all'] }}"
+
+    # Знаходимо всі backup-хости (мають '2.' після префікса)
+    backup_names: "{{ all_hosts | select('search', '^[^.]+2\\..+') | list }}"
+
+    # Витягуємо первинні імена хостів, прибравши '2' перед першою крапкою
+    primary_names: "{{ backup_names | map('regex_replace', '^([^.]+)2(\\..+)', '\\1\\2') | list }}"
 
   tasks:
-    - name: Ping from primary
+    - name: Run only on primary
       ping:
-      when: is_primary
+      when: inventory_hostname in primary_names
