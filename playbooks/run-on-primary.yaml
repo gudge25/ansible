@@ -2,6 +2,7 @@
 - name: Run task only on primary servers
   hosts: all
   gather_facts: false
+  strategy: free
   vars:
     # Всі хости в інвентарі
     all_hosts: "{{ groups['all'] }}"

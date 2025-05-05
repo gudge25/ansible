@@ -1,0 +1,16 @@
+---
+- name: Run task only on primary servers
+  hosts: all
+  gather_facts: false
+  strategy: free
+  vars:
+    # Всі хости в інвентарі
+    all_hosts: "{{ groups['all'] }}"
+
+    # Вибрати лише ті, де НЕМає '2.' після префікса (тобто первинні)
+    primary_names: "{{ all_hosts | reject('search', '^[^.]+2\\..+') | list }}"
+
+  tasks:
+    - name: Ping primary servers only
+      ansible.builtin.ping:
+      when: inventory_hostname in primary_names
