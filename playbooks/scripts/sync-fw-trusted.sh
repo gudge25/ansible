@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# Dead Firewall DNS names
 WEBHOOK_URL="https://n8n.gixo.co.uk/webhook/fb82e12c-d48e-476e-9297-4c6263eb373f"
 HOSTNAME=$(hostname)
 JSON_LOG=()

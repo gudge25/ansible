@@ -1,4 +1,5 @@
 ---
+# This playbook demonstrates how to run a task only on primary servers so no server2 will be pinged.
 - name: Run task only on primary servers
   hosts: all
   gather_facts: false
