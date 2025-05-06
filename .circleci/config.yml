@@ -3,7 +3,7 @@ version: 2.1
 jobs:
   run-megalinter:
     docker:
-      - image: oxsecurity/megalinter:v7.10.1
+      - image: oxsecurity/megalinter:v8
     steps:
       - checkout
       - run:
