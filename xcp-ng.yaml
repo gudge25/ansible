@@ -2,4 +2,4 @@
 - hosts: "{{target_hosts | default('None') }}"
   gather_facts: yes
   roles:
-    - xcp-ng-zabbix-agent
+    - xcp_ng_zabbix_agent
