@@ -9,9 +9,7 @@ jobs:
       - run:
           name: Run MegaLinter
           command: |
-            npx mega-linter-runner \
-              --install-deps \
-              --env MEGALINTER_CONFIG=megalinter-config.yml
+            bash -ex /entrypoint.sh
 
 workflows:
   version: 2
