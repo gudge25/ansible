@@ -7,5 +7,4 @@
     - shell: "{{ shell_command }}"
       register: count
     - debug:
-        msg: "{{ count.stdout_lines | join(' ') }}"  
-    # - debug: var=count.stdout_lines
+        msg: "{{ count.stdout_lines | join(' ') }}"

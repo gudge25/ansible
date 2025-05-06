@@ -1,3 +1,4 @@
+---
 - name: Install Zabbix agent
   yum:
     name: "zabbix{{ ZABBIX_AGENT_VERSION }}-agent"
@@ -7,14 +8,14 @@
 - name: Update Zabbix server address in zabbix_agentd.conf
   lineinfile:
     path: /etc/zabbix_agentd.conf
-    regexp: '^Server='
+    regexp: "^Server="
     line: "Server=127.0.0.1,{{ ZABBIX_SERVER }}"
     state: present
 
 - name: Add custom UserParameter to the end of zabbix_agentd.conf
   lineinfile:
     path: /etc/zabbix_agentd.conf
-    line: 'UserParameter=custom.mdstat,cat /proc/mdstat | grep -c _'
+    line: "UserParameter=custom.mdstat,cat /proc/mdstat | grep -c _"
     insertafter: EOF
     state: present
 
@@ -27,16 +28,16 @@
 - name: Add Zabbix TCP port rule after specific line
   lineinfile:
     path: /etc/sysconfig/iptables
-    line: '-A RH-Firewall-1-INPUT -p tcp -m tcp --dport 10050 -j ACCEPT'
-    insertafter: '^.*--dport 21064.*$'
+    line: "-A RH-Firewall-1-INPUT -p tcp -m tcp --dport 10050 -j ACCEPT"
+    insertafter: "^.*--dport 21064.*$"
     state: present
-  register: iptables_result  
+  register: iptables_result
 
 - name: Restart iptables to apply new rules
   systemd:
     name: iptables
     state: restarted
-  when: iptables_result.changed  
+  when: iptables_result.changed
 
 # If you want to use Username and Password to be authenticated by Zabbix Server
 - name: Set credentials to access Zabbix Server API
@@ -45,15 +46,16 @@
     ansible_httpapi_pass: "{{ ZABBIX_PASSWORD }}"
 
 - name: Add Zabbix Server host
-# Set current task level variables for Zabbix Server host in task
+  # Set current task level variables for Zabbix Server host in task
   vars:
     ansible_network_os: community.zabbix.zabbix
     ansible_connection: httpapi
     ansible_httpapi_port: 80
     ansible_httpapi_use_ssl: false
     ansible_httpapi_validate_certs: false
-    #ansible_zabbix_url_path: "zabbixeu"  # If Zabbix WebUI runs on non-default (zabbix) path ,e.g. http://<FQDN>/zabbixeu
-    ansible_host: "{{ ZABBIX_SERVER }}" # you can use task level ansible_host or delegate_to like in previous example
+    # ansible_zabbix_url_path: "zabbixeu"  # If Zabbix WebUI runs on non-default (zabbix) path ,e.g. http://<FQDN>/zabbixeu
+    ansible_host: "{{ ZABBIX_SERVER }}"
+    # you can use task level ansible_host or delegate_to like in previous example
   become: false
   community.zabbix.zabbix_host:
     host_name: "{{ ansible_default_ipv4.address }}"
@@ -63,15 +65,18 @@
     link_templates:
       - Template MD Soft RAID
     status: enabled
-    state: present  
+    state: present
     force: true
     interfaces:
-      - type: 1  # Agent interface (type 1 for Zabbix agent)
+      - type: 1
+        # Agent interface (type 1 for Zabbix agent)
         main: 1
         useip: 1
-        ip: "{{ ansible_default_ipv4.address }}"  # IP address of the host
+        ip: "{{ ansible_default_ipv4.address }}"
+        # IP address of the host
         dns: ""
-        port: "10050"  # Zabbix agent port (default 10050)
+        port: "10050"
+        # Zabbix agent port (default 10050)
     description: Added by Ansible role
     tags:
       - tag: XCP-NG

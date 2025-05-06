@@ -3,7 +3,7 @@
   gather_facts: false
   hosts: all
   vars:
-    ansible_ssh_timeout: 60 # Set SSH timeout to 60 seconds
+    ansible_ssh_timeout: 60
   tasks:
     - name: Execute Asterisk command and capture output for PJSIP
       ansible.builtin.shell: asterisk -rx "pjsip show endpoints" | grep Endpoint | grep -Ev "dpma_endpoint|Identify|Channels" | grep -Ec "Endpoint:\s+[0-9]+"
