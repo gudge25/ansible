@@ -1,7 +1,7 @@
 ---
 - name: Install Zabbix Agent on FreePBX Servers
   hosts: "{{target_hosts | default('all') }}"
-  gather_facts: no # Disable gathering facts
+  gather_facts: false
   tasks:
     - name: Install Zabbix 40 Agent
       yum:
@@ -10,8 +10,8 @@
     - name: Update Zabbix server address in zabbix_agentd.conf
       lineinfile:
         path: /etc/zabbix_agentd.conf
-        regexp: '^Server='
-        line: 'Server=127.0.0.1,{{ZABBIX_SERVER}}'
+        regexp: "^Server="
+        line: "Server=127.0.0.1,{{ZABBIX_SERVER}}"
         state: present
     - name: Start and enable Zabbix Agent
       systemd:

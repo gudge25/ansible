@@ -14,4 +14,4 @@
     user: root
     minute: 0
     hour: 0
-    day: "*/3" # кратно до 3
+    day: "*/3"
