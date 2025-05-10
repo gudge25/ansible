@@ -25,20 +25,32 @@ dest_trusted=$(ssh "${SSH_OPTS[@]}" "$DEST_HOST" "$SOURCE_LIST_CMD" | grep -v "t
 readarray -t source_entries <<< "$trusted_list"
 readarray -t dest_entries <<< "$dest_trusted"
 
-# Sync: Add missing
+# Build lists for missing and extra entries
+missing_ips=()
+extra_ips=()
+
 for src_ip in "${source_entries[@]}"; do
     if [[ ! " ${dest_entries[*]} " =~ " ${src_ip} " ]]; then
-        echo "Adding missing $src_ip to $DEST_HOST"
-        ssh "${SSH_OPTS[@]}" "$DEST_HOST" "fwconsole firewall trust $src_ip"
+        missing_ips+=("$src_ip")
     fi
 done
 
-# Sync: Remove extra
 for dest_ip in "${dest_entries[@]}"; do
     if [[ ! " ${source_entries[*]} " =~ " ${dest_ip} " ]]; then
-        echo "Removing extra $dest_ip from $DEST_HOST"
-        ssh "${SSH_OPTS[@]}" "$DEST_HOST" "fwconsole firewall untrust $dest_ip"
+        extra_ips+=("$dest_ip")
     fi
 done
+
+# Sync: Add missing in one command
+if [ ${#missing_ips[@]} -gt 0 ]; then
+    echo "Adding missing IPs: ${missing_ips[*]}"
+    ssh "${SSH_OPTS[@]}" "$DEST_HOST" "fwconsole firewall add trusted ${missing_ips[*]}"
+fi
+
+# Sync: Remove extra in one command
+if [ ${#extra_ips[@]} -gt 0 ]; then
+    echo "Removing extra IPs: ${extra_ips[*]}"
+    ssh "${SSH_OPTS[@]}" "$DEST_HOST" "fwconsole firewall del trusted ${extra_ips[*]}"
+fi
 
 echo "Firewall trusted zone sync completed."
