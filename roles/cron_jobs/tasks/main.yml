@@ -6,12 +6,11 @@
     mode: "0755"
     owner: root
     group: root
-
-- name: Add cron job to run script every N days
-  ansible.builtin.cron:
-    name: "Sync firewall trusted list"
-    job: "/usr/local/bin/{{ file_name }}"
-    user: root
-    minute: 0
-    hour: 0
-    day: "*/3"
+# - name: Add cron job to run script every N days
+#   ansible.builtin.cron:
+#     name: "Sync firewall trusted list"
+#     job: "/usr/local/bin/{{ file_name }}"
+#     user: root
+#     minute: 0
+#     hour: 0
+#     day: "*/3"
