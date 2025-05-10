@@ -11,10 +11,10 @@
     # Витягуємо первинні імена хостів, прибравши '2' перед першою крапкою
     primary_names: "{{ backup_names | map('regex_replace', '^([^.]+)2(\\..+)', '\\1\\2') | list }}"
 
-  # tasks:
-  #   - name: PING only primary
-  #     ping:
-  #     when: inventory_hostname in primary_names
+  tasks:
+    #   - name: PING only primary
+    #     ping:
+    #     when: inventory_hostname in primary_names
 
     # - name: Remove sync script from /usr/local/bin
     #   ansible.builtin.file:
