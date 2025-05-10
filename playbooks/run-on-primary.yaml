@@ -16,10 +16,10 @@
       ping:
       when: inventory_hostname in primary_names
 
-    - name: Remove sync script from /usr/local/bin
-      ansible.builtin.file:
-        path: /usr/local/bin/sync-fw-trusted.sh
-        state: absent
+    # - name: Remove sync script from /usr/local/bin
+    #   ansible.builtin.file:
+    #     path: /usr/local/bin/sync-fw-trusted.sh
+    #     state: absent
 
     - name: Run firewall sync script
       ansible.builtin.script: scripts/sync-fw-trusted.sh
