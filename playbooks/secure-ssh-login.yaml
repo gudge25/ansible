@@ -5,13 +5,16 @@
   strategy: free
   
   tasks:
-    - name: Ensure PermitRootLogin is set to prohibit-password
+    - name: Ensure only one PermitRootLogin line set to prohibit-password
       lineinfile:
         path: /etc/ssh/sshd_config
-        regexp: '^#?PermitRootLogin\s+.*'
+        regexp: '^(\s*)PermitRootLogin\s+.*'
         line: 'PermitRootLogin prohibit-password'
         state: present
+        backrefs: yes
         backup: yes
+        insertafter: '^#?Authentication:'  # Insert in the correct context
+        multiple: yes
 
     - name: Restart SSH service
       systemd:
