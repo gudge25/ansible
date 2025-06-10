@@ -1,0 +1,19 @@
+---
+- name: Secure SSH Root Login
+  hosts: "{{ target_hosts | default('none') }}"
+  gather_facts: false
+  strategy: free
+  
+  tasks:
+    - name: Ensure PermitRootLogin is set to prohibit-password
+      lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^#?PermitRootLogin\s+.*'
+        line: 'PermitRootLogin prohibit-password'
+        state: present
+        backup: yes
+
+    - name: Restart SSH service
+      systemd:
+        name: sshd
+        state: restarted
