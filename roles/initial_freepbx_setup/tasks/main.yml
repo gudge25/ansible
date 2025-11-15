@@ -1,0 +1,15 @@
+---
+# tasks file for initial_freepbx_setup
+
+# 1. Ensure fwconsole is available
+- name: Check that fwconsole exists
+  command: fwconsole -V
+  register: fwconsole_check
+  failed_when: fwconsole_check.rc != 0
+  changed_when: false
+
+# 2. Delete cdrpro module
+- name: Delete cdrpro module
+  command: fwconsole ma delete scribe
+  #ignore_errors: yes
+  #changed_when: false

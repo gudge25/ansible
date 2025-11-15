@@ -1,0 +1,5 @@
+---
+- hosts: "{{ target_hosts | default('none') }}"
+  gather_facts: false
+  roles:
+    - initial_freepbx_setup

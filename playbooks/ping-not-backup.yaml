@@ -15,6 +15,7 @@
     - name: Ping primary servers only
       ansible.builtin.ping:
       when: inventory_hostname in primary_names
+
     - name: Run firewall script
       ansible.builtin.script: scripts/sync-fw-trusted.sh
       when: inventory_hostname in primary_names
