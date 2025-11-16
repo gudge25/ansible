@@ -13,12 +13,16 @@
   command: fwconsole ma delete scribe
   #ignore_errors: yes
   #changed_when: false
-- command: fwconsole modulesystemmanager system_ident "VOIP"
+
+- command: fwconsole modulesystemmanager system_ident VOIP
 - command: fwconsole setting MIXMON_FORMAT WAV
 - command: fwconsole setting RSSFEEDS 0
 - command: fwconsole setting RINGTIMER 30
-- command: fwconsole setting FREEPBX_SYSTEM_IDENT PBX
+- command: fwconsole setting FREEPBX_SYSTEM_IDENT VOIP
 - command: fwconsole setting ENABLE_ARI 0
 - command: fwconsole setting SIGNATURECHECK 0
 - command: fwconsole setting SYS_STATS_DISABLE 1
+# Set custom branding files
+- command: fwconsole setting BRAND_CSS_CUSTOM "admin/assets/css/custom.css"
+- command: fwconsole setting BRAND_ALT_JS "admin/assets/js/custom.js"
 - command: fwconsole reload
