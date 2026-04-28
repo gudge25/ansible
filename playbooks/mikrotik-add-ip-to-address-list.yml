@@ -6,7 +6,7 @@
 
   tasks:
     - debug:
-      var: address_list
+        var: address_list
     - name: Add IP to Address List
       community.network.routeros_command:
         commands:
