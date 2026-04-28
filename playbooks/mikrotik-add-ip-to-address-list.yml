@@ -8,7 +8,7 @@
     - name: Add IP to Address List
       community.network.routeros_command:
         commands:
-          - /ip firewall address-list {{ action }} list={{ address_list }} address={{ ip_address }} comment="Added by Ansible"
+          - /ip firewall address-list add list={{ address_list }} address={{ ip_address }} comment="Added by Ansible"
       register: result
 
     - debug:
