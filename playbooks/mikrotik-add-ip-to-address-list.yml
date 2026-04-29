@@ -6,8 +6,4 @@
 
   tasks:
     - debug:
-        var: address_list
-    - name: Add IP to Address List
-      community.network.routeros_command:
-        commands:
-          - /ip firewall address-list add list={{ address_list }} address={{ ip_address }} comment="Added by Ansible"
+        var: address_list_name
