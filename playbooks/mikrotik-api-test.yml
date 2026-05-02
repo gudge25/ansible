@@ -4,8 +4,8 @@
   gather_facts: false
 
   vars:
-    ansible_connection: ansible.netcommon.httpapi # 🔥 ВАЖЛИВО
-    ansible_network_os: community.routeros.routeros
+    ansible_connection: httpapi
+    ansible_network_os: routeros
     ansible_httpapi_port: 8728
     ansible_httpapi_use_ssl: false
     ansible_httpapi_validate_certs: false
