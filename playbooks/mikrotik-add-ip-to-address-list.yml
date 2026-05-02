@@ -1,6 +1,6 @@
 ---
 - name: Add IP to Mikrotik Address List
-  hosts: mikrotik
+  hosts: "{{ target_hosts | default('none') }}"
   gather_facts: false
   strategy: free
   connection: local
