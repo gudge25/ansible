@@ -1,9 +1,11 @@
 ---
 - name: Add IP to Mikrotik Address List
-  hosts: all
+  hosts: "{{ target_hosts | default('none') }}"
   gather_facts: false
   strategy: free
 
   tasks:
-    - debug:
-        var: address_list_name
+    - name: Add IP to Address List
+      community.routeros.routeros_command:
+        commands:
+          - /ip firewall address-list add list={{ address_list_name }} address={{ ip_address }} comment="Added by Ansible"
