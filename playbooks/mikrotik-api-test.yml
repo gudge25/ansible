@@ -33,6 +33,7 @@
         hostname: "{{ inventory_hostname }}"
         username: "{{ MIKROTIK_USERNAME }}"
         password: "{{ MIKROTIK_PASSWORD }}"
+        path: "/ip/firewall/address-list"
         query: ".id address WHERE address == 1.1.1.1"
       register: address_list_query
 
