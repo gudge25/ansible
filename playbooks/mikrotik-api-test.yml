@@ -11,13 +11,13 @@
     ansible_httpapi_validate_certs: false
 
   tasks:
-    - name: Get IP addresses
-      community.routeros.api:
-        path: ip/address
-      register: result
+    # - name: Get IP addresses
+    #   community.routeros.api:
+    #     path: ip/address
+    #   register: result
 
-    - debug:
-        var: result
+    # - debug:
+    #     var: result
     - name: Debug ansible version
 
       command: ansible --version
