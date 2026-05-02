@@ -18,13 +18,12 @@
 
     - debug:
         var: result
+    - name: Debug ansible version
 
-- name: Debug ansible version
+      command: ansible --version
 
-  command: ansible --version
+      register: ver
 
-  register: ver
+    - debug:
 
-- debug:
-
-    var: ver.stdout
+        var: ver.stdout
