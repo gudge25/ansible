@@ -46,4 +46,4 @@
         username: "{{ MIKROTIK_USERNAME }}"
         password: "{{ MIKROTIK_PASSWORD }}"
         path: "/ip/firewall/address-list"
-        remove: "{{ address_list_query.results[0]['.id'] }}"
+        remove: "{{ address_list_query.results[0].id }}"
