@@ -28,7 +28,7 @@
         path: "/ip/firewall/address-list"
         add: "address=1.1.1.1 list=admin_list"
 
-    - name: Remove address from address list
+    - name: Query address-list entry to remove
       community.routeros.api:
         hostname: "{{ inventory_hostname }}"
         username: "{{ MIKROTIK_USERNAME }}"
@@ -46,4 +46,5 @@
         username: "{{ MIKROTIK_USERNAME }}"
         password: "{{ MIKROTIK_PASSWORD }}"
         path: "/ip/firewall/address-list"
-        remove: "{{ address_list_query.results[0].id }}"
+        remove: "{{ address_list_query.msg[0]['.id'] }}"
+      when: address_list_query.msg | length > 0
