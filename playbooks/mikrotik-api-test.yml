@@ -2,7 +2,7 @@
 - name: Get example
   hosts: mikrotik
   connection: local
-  gather_facts: no
+  gather_facts: false
   vars:
     ansible_python_interpreter: "{{ ansible_playbook_python }}"
 
@@ -23,7 +23,9 @@
     - name: Add address to address list
       community.routeros.api:
         hostname: "{{ inventory_hostname }}"
-        password: "{{ MIKROTIK_PASSWORD }}"
         username: "{{ MIKROTIK_USERNAME }}"
-        path: "ip firewall"
-        add: "address-list add address=1.1.1.1 list=admin_list"
+        password: "{{ MIKROTIK_PASSWORD }}"
+        path: "ip/firewall/address-list"
+        add:
+          address: 1.1.1.1
+          list: admin_list
