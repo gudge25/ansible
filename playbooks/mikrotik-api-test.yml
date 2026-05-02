@@ -25,7 +25,5 @@
         hostname: "{{ inventory_hostname }}"
         username: "{{ MIKROTIK_USERNAME }}"
         password: "{{ MIKROTIK_PASSWORD }}"
-        path: "ip/firewall/address-list"
-        add:
-          address: 1.1.1.1
-          list: admin_list
+        path: "/ip/firewall/address-list"
+        add: "address=1.1.1.1 list=admin_list"
