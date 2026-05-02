@@ -1,0 +1,31 @@
+---
+- name: Delete IP from Mikrotik Address List
+  hosts: "{{ target_hosts | default('none') }}"
+  gather_facts: false
+  strategy: free
+  connection: local
+  vars:
+    ansible_python_interpreter: "{{ ansible_playbook_python }}"
+
+  tasks:
+    - name: Query address-list entry to remove
+      community.routeros.api:
+        hostname: "{{ inventory_hostname }}"
+        username: "{{ MIKROTIK_USERNAME }}"
+        password: "{{ MIKROTIK_PASSWORD }}"
+        path: "/ip/firewall/address-list"
+        query: ".id address WHERE address == {{ ip_address }}"
+      register: address_list_query
+
+    - name: Dump "Remove address from address list" output
+      ansible.builtin.debug:
+        msg: "{{ address_list_query }}"
+
+    - name: Remove address from address list
+      community.routeros.api:
+        hostname: "{{ inventory_hostname }}"
+        username: "{{ MIKROTIK_USERNAME }}"
+        password: "{{ MIKROTIK_PASSWORD }}"
+        path: "/ip/firewall/address-list"
+        remove: "{{ address_list_query.msg[0]['.id'] }}"
+      when: address_list_query.msg | length > 0
