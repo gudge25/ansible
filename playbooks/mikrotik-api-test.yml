@@ -1,22 +1,19 @@
 ---
-- name: MikroTik API test
-  hosts: all
-  gather_facts: false
+- name: Get example
+  hosts: mikrotik
+  connection: local
+  gather_facts: no
 
   tasks:
-    # - name: Get IP addresses
-    #   community.routeros.api:
-    #     path: ip/address
-    #   register: result
+    - name: Get example - ip address print
+      community.routeros.api:
+        hostname: "{{ inventory_hostname }}"
+        password: "{{ MIKROTIK_PASSWORD }}"
+        username: "{{ MIKROTIK_USERNAME }}"
+        path: "ip address"
+        port: 8728
+      register: ipaddrd_printout
 
-    # - debug:
-    #     var: result
-    - name: Debug ansible version
-
-      command: ansible --version
-
-      register: ver
-
-    - debug:
-
-        var: ver.stdout
+    - name: Dump "Get example" output
+      ansible.builtin.debug:
+        msg: "{{ ipaddrd_printout }}"
