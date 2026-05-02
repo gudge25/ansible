@@ -19,3 +19,11 @@
     - name: Dump "Get example" output
       ansible.builtin.debug:
         msg: "{{ ipaddrd_printout }}"
+
+    - name: Add address to address list
+      community.routeros.api:
+        hostname: "{{ inventory_hostname }}"
+        password: "{{ MIKROTIK_PASSWORD }}"
+        username: "{{ MIKROTIK_USERNAME }}"
+        path: "ip firewall address-list"
+        add: "address-list add address=1.1.1.1 list=admin_list"
