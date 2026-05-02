@@ -40,3 +40,10 @@
     - name: Dump "Remove address from address list" output
       ansible.builtin.debug:
         msg: "{{ address_list_query }}"
+    - name: Remove address from address list
+      community.routeros.api:
+        hostname: "{{ inventory_hostname }}"
+        username: "{{ MIKROTIK_USERNAME }}"
+        password: "{{ MIKROTIK_PASSWORD }}"
+        path: "/ip/firewall/address-list"
+        remove: "{{ address_list_query.results[0]['.id'] }}"
