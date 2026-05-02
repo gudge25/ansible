@@ -27,3 +27,15 @@
         password: "{{ MIKROTIK_PASSWORD }}"
         path: "/ip/firewall/address-list"
         add: "address=1.1.1.1 list=admin_list"
+
+    - name: Remove address from address list
+      community.routeros.api:
+        hostname: "{{ inventory_hostname }}"
+        username: "{{ MIKROTIK_USERNAME }}"
+        password: "{{ MIKROTIK_PASSWORD }}"
+        query: ".id address WHERE address == 1.1.1.1"
+      register: address_list_query
+
+    - name: Dump "Remove address from address list" output
+      ansible.builtin.debug:
+        msg: "{{ address_list_query }}"
