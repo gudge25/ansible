@@ -11,7 +11,7 @@
       set_fact:
         pbx_pairs: "{{ pbx_pairs | default([]) + [{'src': item, 'dst': pair}] }}"
       vars:
-        pair: "{{ item | regex_replace('^(.*?)(\\..*)$', '\\12\\2') }}"
+        pair: "{{ item | regex_replace('^(.*?)(\\..*)$', '\\g<1>2\\2') }}"
       loop: "{{ pbx_hosts }}"
       when:
         - item is not match('.*[0-9]\\..*')
