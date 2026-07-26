@@ -26,4 +26,15 @@
       register: firewall_lists
       loop: "{{ pbx_pairs }}"
       loop_control:
-        label: "{{ item.src }}"    
+        label: "{{ item.src }}"
+        
+    - name: Save list on destination
+      delegate_to: "{{ item.item.dst }}"
+      copy:
+        dest: /tmp/list.txt
+        content: "{{ item.stdout }}\n"
+        mode: "0644"
+      loop: "{{ firewall_lists.results }}"
+      loop_control:
+        label: "{{ item.item.dst }}"    
+     
