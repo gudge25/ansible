@@ -17,29 +17,32 @@
         - item is not match('^[^.]+2\\.')
         - pair in pbx_hosts
 
-    - name: Compare firewall lists
+    - name: Read firewall list from source PBXs
+      delegate_to: "{{ item.src }}"
+      shell: |
+        fwconsole firewall list trusted | grep -v entries | sort -u | xargs -n1
+      register: src_lists
+      changed_when: false
       loop: "{{ pbx_pairs }}"
       loop_control:
-        label: "{{ item.src }} -> {{ item.dst }}"
-      block:
+        label: "{{ item.src }}"
 
-        - name: Read source firewall list
-          delegate_to: "{{ item.src }}"
-          shell: |
-            fwconsole firewall list trusted | grep -v entries | sort -u | xargs -n1
-          register: src
-          changed_when: false
+    - name: Read firewall list from destination PBXs
+      delegate_to: "{{ item.dst }}"
+      shell: |
+        fwconsole firewall list trusted | grep -v entries | sort -u | xargs -n1
+      register: dst_lists
+      changed_when: false
+      loop: "{{ pbx_pairs }}"
+      loop_control:
+        label: "{{ item.dst }}"
 
-        - name: Read destination firewall list
-          delegate_to: "{{ item.dst }}"
-          shell: |
-            fwconsole firewall list trusted | grep -v entries | sort -u | xargs -n1
-          register: dst
-          changed_when: false
-
-        - name: Show differences
-          debug:
-            msg:
-              pair: "{{ item.src }} -> {{ item.dst }}"
-              add: "{{ src.stdout_lines | difference(dst.stdout_lines) }}"
-              remove: "{{ dst.stdout_lines | difference(src.stdout_lines) }}"
+    - name: Show differences
+      debug:
+        msg:
+          pair: "{{ pbx_pairs[item].src }} -> {{ pbx_pairs[item].dst }}"
+          add: "{{ src_lists.results[item].stdout_lines | difference(dst_lists.results[item].stdout_lines) }}"
+          remove: "{{ dst_lists.results[item].stdout_lines | difference(src_lists.results[item].stdout_lines) }}"
+      loop: "{{ range(0, pbx_pairs | length) | list }}"
+      loop_control:
+        label: "{{ pbx_pairs[item].src }}"
