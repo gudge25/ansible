@@ -4,6 +4,7 @@
 
   vars:
     pbx_hosts: "{{ groups['all_pbx_servers'] }}"
+    apply_changes: false
 
   tasks:
 
@@ -37,12 +38,43 @@
       loop_control:
         label: "{{ item.dst }}"
 
+    - name: Build sync list
+      set_fact:
+        sync_list: "{{ sync_list | default([]) + [ {
+          'src': pbx_pairs[item].src,
+          'dst': pbx_pairs[item].dst,
+          'add': src_lists.results[item].stdout_lines | difference(dst_lists.results[item].stdout_lines),
+          'remove': dst_lists.results[item].stdout_lines | difference(src_lists.results[item].stdout_lines)
+        } ] }}"
+      loop: "{{ range(0, pbx_pairs | length) | list }}"
+
     - name: Show differences
       debug:
         msg:
-          pair: "{{ pbx_pairs[item].src }} -> {{ pbx_pairs[item].dst }}"
-          add_to_secondary: "{{ src_lists.results[item].stdout_lines | difference(dst_lists.results[item].stdout_lines) }}"
-          remove_from_main: "{{ dst_lists.results[item].stdout_lines | difference(src_lists.results[item].stdout_lines) }}"
-      loop: "{{ range(0, pbx_pairs | length) | list }}"
+          pair: "{{ item.src }} -> {{ item.dst }}"
+          add_to_secondary: "{{ item.add }}"
+          remove_from_secondary: "{{ item.remove }}"
+      loop: "{{ sync_list }}"
       loop_control:
-        label: "{{ pbx_pairs[item].src }}"
+        label: "{{ item.src }}"
+
+    - name: Add missing trusted entries
+      delegate_to: "{{ item.0.dst }}"
+      shell: >
+        fwconsole firewall add trusted {{ item.1 }}
+      loop: "{{ sync_list | subelements('add') }}"
+      loop_control:
+        label: "{{ item.0.dst }} -> {{ item.1 }}"
+      when:
+        - item.0.add | length > 0
+
+    - name: Remove obsolete trusted entries
+      delegate_to: "{{ item.0.dst }}"
+      shell: >
+        fwconsole firewall del trusted {{ item.1 }}
+      loop: "{{ sync_list | subelements('remove') }}"
+      loop_control:
+        label: "{{ item.0.dst }} -> {{ item.1 }}"
+      when:
+        - item.0.remove | length > 0
+        - apply_changes | bool
