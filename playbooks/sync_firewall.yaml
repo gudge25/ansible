@@ -18,3 +18,12 @@
 
     - debug:
         var: pbx_pairs
+
+    - name: Get trusted firewall list from source
+      delegate_to: "{{ item.src }}"
+      shell: |
+        fwconsole firewall list trusted | grep -v entries | sort -u | xargs
+      register: firewall_lists
+      loop: "{{ pbx_pairs }}"
+      loop_control:
+        label: "{{ item.src }}"    
