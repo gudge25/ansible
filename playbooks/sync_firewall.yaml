@@ -41,8 +41,8 @@
       debug:
         msg:
           pair: "{{ pbx_pairs[item].src }} -> {{ pbx_pairs[item].dst }}"
-          add: "{{ src_lists.results[item].stdout_lines | difference(dst_lists.results[item].stdout_lines) }}"
-          remove: "{{ dst_lists.results[item].stdout_lines | difference(src_lists.results[item].stdout_lines) }}"
+          add_to_secondary: "{{ src_lists.results[item].stdout_lines | difference(dst_lists.results[item].stdout_lines) }}"
+          remove_from_main: "{{ dst_lists.results[item].stdout_lines | difference(src_lists.results[item].stdout_lines) }}"
       loop: "{{ range(0, pbx_pairs | length) | list }}"
       loop_control:
         label: "{{ pbx_pairs[item].src }}"
