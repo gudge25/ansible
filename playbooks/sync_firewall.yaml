@@ -1,0 +1,21 @@
+---
+- hosts: all
+  gather_facts: false
+
+  vars:
+    pbx_hosts: "{{ groups['all_pbx_servers'] }}"
+
+  tasks:
+
+    - name: Build PBX pairs
+      set_fact:
+        pbx_pairs: "{{ pbx_pairs | default([]) + [{'src': item, 'dst': pair}] }}"
+      vars:
+        pair: "{{ item | regex_replace('^(.*?)(\\..*)$', '\\12\\2') }}"
+      loop: "{{ pbx_hosts }}"
+      when:
+        - item is not match('.*[0-9]\\..*')
+        - pair in pbx_hosts
+
+    - debug:
+        var: pbx_pairs
