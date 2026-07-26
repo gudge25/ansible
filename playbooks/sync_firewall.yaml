@@ -6,6 +6,7 @@
     pbx_hosts: "{{ groups['all_pbx_servers'] }}"
 
   tasks:
+
     - name: Build PBX pairs
       set_fact:
         pbx_pairs: "{{ pbx_pairs | default([]) + [{'src': item, 'dst': pair}] }}"
@@ -16,25 +17,29 @@
         - item is not match('^[^.]+2\\.')
         - pair in pbx_hosts
 
-    - debug:
-        var: pbx_pairs
-
-    - name: Get trusted firewall list from source
-      delegate_to: "{{ item.src }}"
-      shell: |
-        fwconsole firewall list trusted | grep -v entries | sort -u | xargs
-      register: firewall_lists
+    - name: Compare firewall lists
       loop: "{{ pbx_pairs }}"
       loop_control:
-        label: "{{ item.src }}"
-        
-    - name: Save list on destination
-      delegate_to: "{{ item.item.dst }}"
-      copy:
-        dest: /tmp/list.txt
-        content: "{{ item.stdout }}\n"
-        mode: "0644"
-      loop: "{{ firewall_lists.results }}"
-      loop_control:
-        label: "{{ item.item.dst }}"    
-     
+        label: "{{ item.src }} -> {{ item.dst }}"
+      block:
+
+        - name: Read source firewall list
+          delegate_to: "{{ item.src }}"
+          shell: |
+            fwconsole firewall list trusted | grep -v entries | sort -u | xargs -n1
+          register: src
+          changed_when: false
+
+        - name: Read destination firewall list
+          delegate_to: "{{ item.dst }}"
+          shell: |
+            fwconsole firewall list trusted | grep -v entries | sort -u | xargs -n1
+          register: dst
+          changed_when: false
+
+        - name: Show differences
+          debug:
+            msg:
+              pair: "{{ item.src }} -> {{ item.dst }}"
+              add: "{{ src.stdout_lines | difference(dst.stdout_lines) }}"
+              remove: "{{ dst.stdout_lines | difference(src.stdout_lines) }}"
