@@ -1,6 +1,8 @@
 ---
 - hosts: all
   gather_facts: false
+  run_once: true
+  delegate_to: localhost
 
   vars:
     pbx_hosts: "{{ groups['all_pbx_servers'] }}"
