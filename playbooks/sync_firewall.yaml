@@ -4,7 +4,6 @@
 
   vars:
     pbx_hosts: "{{ groups['all_pbx_servers'] }}"
-    apply_changes: false
 
   tasks:
 
@@ -77,4 +76,3 @@
         label: "{{ item.0.dst }} -> {{ item.1 }}"
       when:
         - item.0.remove | length > 0
-        - apply_changes | bool
